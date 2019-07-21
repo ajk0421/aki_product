@@ -1,6 +1,8 @@
 class Product
+  #アクセサは要らない
   attr_accessor :product_num, :name, :price
 
+  #キーワード引数、オプション引数で
   def initialize(product_num, name, price)
     @product_num = product_num
     @name  = name
@@ -8,13 +10,16 @@ class Product
   end
 end
 
+#クラス名はキャメルケース
 class DVD < Product
+
+  #アクセサ要らない
   attr_accessor :running_time
 
   def initialize(product_num, name, price, running_time)
-    #スーパークラスのinitializeメソッドを呼び出す
+
     super(product_num, name, price)
-    #DVDクラス独自の属性
+
     @running_time = running_time.to_i
   end
 
@@ -30,11 +35,13 @@ class DVD < Product
 end
 
 class Book < Product
+
+  #アクセサ要らない、親で定義してるものは要らない
   attr_accessor :product_num, :name, :price, :page_num
 
   def initialize(product_num, name, price, page_num)
     super(product_num, name, price)
-    #本クラスの独自の属性
+
     @page_num = page_num
   end
 
@@ -63,17 +70,22 @@ dvd3.products_display
 book1.products_display
 book2.products_display
 
+#スネークケース
 def payoff(products)
   puts "商品番号を選択してください"
   num = gets.chomp!.to_i
   select_product = products[num -1]
   return puts "選択された商品番号はありません" if select_product.nil?
   puts "商品の個数を選択してください"
+
+  #chomp!
   quantity = gets.chomp!.to_i
   #個数によって条件分岐
   if quantity >= 3
     sum = select_product.price * quantity
     #割引計算
+
+    #マジックナンバー
     discount = sum * 0.1
     sum = sum - discount.to_i
     puts "お会計は#{sum}円です"
