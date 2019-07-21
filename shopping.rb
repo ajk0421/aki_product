@@ -10,6 +10,8 @@ class Shopping
     num = gets.chomp.to_i
     select_product = products[num - ADJUSTMENT_NUM]
 
+    return puts "選択された商品番号はありません" if select_product.nil?
+
     puts "商品の個数を選択してください"
 
     quantity = gets.chomp.to_i
